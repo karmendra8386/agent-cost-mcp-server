@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-cost-mcp-server"
+version = "0.1.0"
+description = "MCP server to estimate, budget, and compare the cost of LLM work per task"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Karmendra Pandey" },
+]
+dependencies = [
+    "mcp[cli]>=1.0.0,<2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+agent-cost-mcp-server = "agent_cost_mcp_server.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_cost_mcp_server"]
