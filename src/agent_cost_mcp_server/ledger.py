@@ -65,6 +65,22 @@ class Ledger:
             raise ValueError("budget_usd must be non-negative")
         entries = [e for e in self._load() if e["task_id"] == task_id]
         spent = round(sum(e["cost_usd"] for e in entries), 6)
+        by_model: dict[str, dict] = {}
+        for e in entries:
+            mid = e["model_id"]
+            if mid not in by_model:
+                by_model[mid] = {
+                    "calls": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 0,
+                    "spent_usd": 0.0,
+                }
+            by_model[mid]["calls"] += 1
+            by_model[mid]["input_tokens"] += e["input_tokens"]
+            by_model[mid]["output_tokens"] += e["output_tokens"]
+            by_model[mid]["spent_usd"] = round(
+                by_model[mid]["spent_usd"] + e["cost_usd"], 6
+            )
         return {
             "task_id": task_id,
             "spent_usd": spent,
@@ -73,4 +89,5 @@ class Ledger:
             "over_budget": spent > budget_usd,
             "calls": len(entries),
             "models_used": sorted({e["model_id"] for e in entries}),
+            "by_model": dict(sorted(by_model.items())),
         }

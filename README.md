@@ -24,7 +24,7 @@ it makes no network calls at runtime.
 | `estimate_run_cost` | `model_id`, `input_tokens`, `output_tokens` | The model's cost for one run, plus the same workload priced on every other model, cheapest first |
 | `compare_models_for_task` | `input_tokens`, `output_tokens`, `success_rates?` | All models ranked by expected **cost per successful task** (cost per attempt ÷ success rate) |
 | `record_spend` | `task_id`, `model_id`, `input_tokens`, `output_tokens` | The recorded ledger entry, priced at list rates |
-| `budget_status` | `task_id`, `budget_usd` | `{spent_usd, remaining_usd, over_budget, calls, models_used}` for the task |
+| `budget_status` | `task_id`, `budget_usd` | `{spent_usd, remaining_usd, over_budget, calls, models_used, by_model}` for the task. `by_model` maps each model_id to `{calls, input_tokens, output_tokens, spent_usd}` |
 
 Cost per token is the wrong ranking for agent work: a cheap model that
 fails half its tasks costs more per success than a pricier, reliable one.
