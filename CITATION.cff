@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "agent-cost-mcp-server"
+authors:
+  - family-names: Pandey
+    given-names: Karmendra
+    orcid: "https://orcid.org/0009-0000-3461-9889"
+version: 0.1.0
+date-released: 2026-10-20
+repository-code: "https://github.com/karmendra8386/agent-cost-mcp-server"
+url: "https://github.com/karmendra8386/agent-cost-mcp-server"
+license: Apache-2.0
+abstract: "An MCP server that gives agents and developers tools to estimate, budget, and compare the cost of LLM work per task: price_usage, estimate_run_cost, compare_models_for_task (ranked by cost per successful task), record_spend, and budget_status, over a maintained pricing snapshot with a local JSON ledger. Reference implementation for awslabs/mcp RFC #4772, built on tokenecon."
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23195511
+    description: "Companion preprint (token-economics paper, via tokenecon)"
