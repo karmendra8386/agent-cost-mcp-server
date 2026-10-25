@@ -91,6 +91,26 @@ uv sync --extra dev   # or: pip install -e ".[dev]"
 pytest
 ```
 
+## Cite
+
+If you use this software in your work, please cite the software itself.
+
+**Software**
+
+```bibtex
+@software{pandey_agent_cost_mcp_server_2026,
+  author = {Pandey, Karmendra},
+  title = {agent-cost-mcp-server},
+  version = {0.1.0},
+  url = {https://github.com/karmendra8386/agent-cost-mcp-server},
+  date = {2026-10-20}
+}
+```
+
+The cost model is described in the companion preprint: Pandey, K., "Token-Economics for Agentic AI: A Cost Model and Tiered Routing Reference" — doi:10.5281/zenodo.23195511.
+
+A `CITATION.cff` is included for automated citation tooling.
+
 ## License
 
 Apache-2.0 — see [LICENSE](LICENSE).
