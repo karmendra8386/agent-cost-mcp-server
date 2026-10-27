@@ -93,7 +93,8 @@ pytest
 
 ## Cite
 
-If you use this software in your work, please cite the software itself.
+If you use this software in your work, please cite the software itself — and,
+for the cost model and methods behind it, the companion preprint.
 
 **Software**
 
@@ -102,12 +103,27 @@ If you use this software in your work, please cite the software itself.
   author = {Pandey, Karmendra},
   title = {agent-cost-mcp-server},
   version = {0.1.0},
+  doi = {10.5281/zenodo.23680824},
   url = {https://github.com/karmendra8386/agent-cost-mcp-server},
-  date = {2026-10-20}
+  date = {2026-10-26}
 }
 ```
 
-The cost model is described in the companion preprint: Pandey, K., "Token-Economics for Agentic AI: A Cost Model and Tiered Routing Reference" — doi:10.5281/zenodo.23195511.
+**Companion preprint**
+
+> K. Pandey, "Token-Economics for Agentic AI: A Cost Model and Tiered Routing
+> Reference," Zenodo, DOI [10.5281/zenodo.23195511](https://zenodo.org/records/23195511), Oct. 2026.
+
+```bibtex
+@misc{pandey_tokeneconomics_2026,
+  author = {Pandey, Karmendra},
+  title = {Token-Economics for Agentic AI: A Cost Model and Tiered Routing Reference},
+  doi = {10.5281/zenodo.23195511},
+  url = {https://zenodo.org/records/23195511},
+  publisher = {Zenodo},
+  date = {2026-10}
+}
+```
 
 A `CITATION.cff` is included for automated citation tooling.
 
