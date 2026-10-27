@@ -1,5 +1,8 @@
 # Agent Cost MCP Server
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23680824-blue)](https://doi.org/10.5281/zenodo.23680824)
+[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+
 An MCP server that gives agents and developers tools to **estimate, budget,
 and compare the cost of LLM work before and during a run** — the model-spend
 counterpart to AWS infrastructure cost tooling.
@@ -38,24 +41,63 @@ for that pattern.
 
 ## Installation
 
-Run it with `uvx`:
+The server installs from GitHub today. A PyPI release is planned — until
+it lands, `uvx agent-cost-mcp-server` and `pip install
+agent-cost-mcp-server` do **not** work yet; use the from-GitHub commands
+below (both verified). Requires Python 3.10+; the `uvx` path needs
+[uv](https://docs.astral.sh/uv/).
+
+### Claude Code
+
+```bash
+claude mcp add agent-cost -- uvx --from git+https://github.com/karmendra8386/agent-cost-mcp-server agent-cost-mcp-server
+```
+
+### Claude Desktop and Cursor
+
+Add to the client's MCP configuration (Claude Desktop:
+`claude_desktop_config.json`; Cursor: `.cursor/mcp.json`):
 
 ```json
 {
   "mcpServers": {
     "agent-cost": {
       "command": "uvx",
-      "args": ["agent-cost-mcp-server"]
+      "args": [
+        "--from",
+        "git+https://github.com/karmendra8386/agent-cost-mcp-server",
+        "agent-cost-mcp-server"
+      ]
     }
   }
 }
 ```
 
-Or install with pip:
+### VS Code
+
+Add to `.vscode/mcp.json` (VS Code uses a `servers` key):
+
+```json
+{
+  "servers": {
+    "agent-cost": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/karmendra8386/agent-cost-mcp-server",
+        "agent-cost-mcp-server"
+      ]
+    }
+  }
+}
+```
+
+### pip
 
 ```bash
-pip install agent-cost-mcp-server
-agent-cost-mcp-server
+pip install git+https://github.com/karmendra8386/agent-cost-mcp-server
+agent-cost-mcp-server   # serves over stdio
 ```
 
 ## Pricing snapshot
