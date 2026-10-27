@@ -100,6 +100,81 @@ pip install git+https://github.com/karmendra8386/agent-cost-mcp-server
 agent-cost-mcp-server   # serves over stdio
 ```
 
+## Example: what a tool call returns
+
+`compare_models_for_task` for one attempt at a task using 10,000 input
+and 2,000 output tokens, with example success rates supplied for a few
+models (substitute your own measured rates; models without a supplied
+rate are ranked on raw cost):
+
+```json
+{
+  "input_tokens": 10000,
+  "output_tokens": 2000,
+  "success_rates": {
+    "amazon.nova-micro": 0.2,
+    "amazon.nova-lite": 0.6,
+    "openai.gpt-5-nano": 0.4,
+    "openai.gpt-4o-mini": 0.9,
+    "anthropic.claude-haiku-3-5": 0.85,
+    "anthropic.claude-sonnet-4-5": 0.95
+  }
+}
+```
+
+Response, captured from a live run of the server (pricing snapshot v1,
+2026-10-20; first 5 of 18 ranked models):
+
+```json
+{
+  "input_tokens": 10000,
+  "output_tokens": 2000,
+  "ranked": [
+    {
+      "model": "amazon.nova-lite",
+      "display_name": "Amazon Nova Lite",
+      "cost_per_run_usd": 0.00108,
+      "success_rate": 0.6,
+      "cost_per_success_usd": 0.0018
+    },
+    {
+      "model": "google.gemini-2.5-flash-lite",
+      "display_name": "Gemini 2.5 Flash-Lite",
+      "cost_per_run_usd": 0.0018,
+      "success_rate": 1.0,
+      "cost_per_success_usd": 0.0018
+    },
+    {
+      "model": "openai.gpt-4o-mini",
+      "display_name": "GPT-4o mini",
+      "cost_per_run_usd": 0.0027,
+      "success_rate": 0.9,
+      "cost_per_success_usd": 0.003
+    },
+    {
+      "model": "amazon.nova-micro",
+      "display_name": "Amazon Nova Micro",
+      "cost_per_run_usd": 0.00063,
+      "success_rate": 0.2,
+      "cost_per_success_usd": 0.00315
+    },
+    {
+      "model": "openai.gpt-5-nano",
+      "display_name": "GPT-5 nano",
+      "cost_per_run_usd": 0.0013,
+      "success_rate": 0.4,
+      "cost_per_success_usd": 0.00325
+    }
+  ],
+  "pricing_snapshot": "v1 (2026-10-20)"
+}
+```
+
+Note the flip: Amazon Nova Micro is the cheapest model per run
+($0.00063), but at a 20% success rate it ranks fourth per *successful*
+task ($0.00315 — roughly five attempts per success). Nova Lite costs
+1.7× more per run and is the cheapest per success.
+
 ## Pricing snapshot
 
 Prices live in `src/agent_cost_mcp_server/pricing.json` — a versioned
