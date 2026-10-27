@@ -15,9 +15,13 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import FastMCP
 
-from . import pricing, ledger as ledger_mod
+from . import __version__, pricing, ledger as ledger_mod
 
 mcp = FastMCP("agent-cost-mcp-server")
+# FastMCP does not forward a version to the low-level server, which then
+# reports the MCP SDK's version in the initialize handshake. Pin the
+# package version so clients see the server's real version.
+mcp._mcp_server.version = __version__
 
 _table = pricing.PricingTable()
 _ledger = ledger_mod.Ledger()
