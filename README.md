@@ -1,5 +1,7 @@
 # Agent Cost MCP Server
 
+<!-- mcp-name: io.github.karmendra8386/agent-cost-mcp-server -->
+
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23680824-blue)](https://doi.org/10.5281/zenodo.23680824)
 [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
@@ -219,7 +221,7 @@ for the cost model and methods behind it, the companion preprint.
 @software{pandey_agent_cost_mcp_server_2026,
   author = {Pandey, Karmendra},
   title = {agent-cost-mcp-server},
-  version = {0.1.0},
+  version = {0.1.1},
   doi = {10.5281/zenodo.23680824},
   url = {https://github.com/karmendra8386/agent-cost-mcp-server},
   date = {2026-10-26}

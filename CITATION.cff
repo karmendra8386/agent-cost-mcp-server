@@ -6,8 +6,8 @@ authors:
   - family-names: Pandey
     given-names: Karmendra
     orcid: "https://orcid.org/0009-0000-3461-9889"
-version: 0.1.0
-date-released: 2026-10-26
+version: 0.1.1
+date-released: 2026-11-02
 doi: 10.5281/zenodo.23680824
 repository-code: "https://github.com/karmendra8386/agent-cost-mcp-server"
 url: "https://github.com/karmendra8386/agent-cost-mcp-server"
