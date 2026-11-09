@@ -21,6 +21,12 @@ The server is self-contained: a maintained pricing snapshot ships with it,
 no AWS account or API key is needed, all state is a local JSON ledger, and
 it makes no network calls at runtime.
 
+## Demo
+
+![agent-cost-mcp-server demo](demo/demo.gif)
+
+*A live MCP client session (Nov 9, 2026): the client connects over stdio, lists the five tools, prices a Sonnet 4.5 run at $0.063, re-ranks models by cost per **successful** task, records two spends to the ledger, and checks the task against its budget — $0.0784 of $0.10 spent. Full session output and the ledger it wrote are in [`demo/`](demo/).*
+
 ## Tools
 
 | Tool | Arguments | Returns |

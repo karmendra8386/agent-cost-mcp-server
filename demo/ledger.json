@@ -1,0 +1,18 @@
+[
+  {
+    "task_id": "demo-task",
+    "model_id": "anthropic.claude-sonnet-4-5",
+    "input_tokens": 12000,
+    "output_tokens": 1800,
+    "cost_usd": 0.063,
+    "recorded_at": "2026-11-09T06:02:01.135343+00:00"
+  },
+  {
+    "task_id": "demo-task",
+    "model_id": "anthropic.claude-haiku-4-5",
+    "input_tokens": 9400,
+    "output_tokens": 1200,
+    "cost_usd": 0.0154,
+    "recorded_at": "2026-11-09T06:02:01.140162+00:00"
+  }
+]

@@ -1,0 +1,143 @@
+
+### agent-cost-mcp-server — live MCP session, Nov 9 2026
+# A real MCP client (official mcp SDK) connects over stdio to the
+# server from this repo, lists its tools, and calls each one.
+# Pricing is the snapshot shipped in the repo; the ledger is a local
+# JSON file (redirected into demo/ so it ships as evidence).
+
+$ python demo_client.py   # tools/list + 6 tool calls, one session
+
+### price_usage: Sonnet 4.5, 12,000 in / 1,800 out
+>> price_usage: Sonnet 4.5, 12,000 in / 1,800 out
+{
+ "model": "anthropic.claude-sonnet-4-5",
+ "display_name": "Claude Sonnet 4.5",
+ "provider": "anthropic",
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "input_cost_usd": 0.036,
+ "output_cost_usd": 0.027,
+ "cost_usd": 0.063
+}
+
+### estimate_run_cost: same workload, every model
+>> estimate_run_cost: same workload, every model
+{
+ "model": "anthropic.claude-sonnet-4-5",
+ "display_name": "Claude Sonnet 4.5",
+ "provider": "anthropic",
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "input_cost_usd": 0.036,
+ "output_cost_usd": 0.027,
+ "cost_usd": 0.063,
+ "alternatives": [
+  {
+   "model": "amazon.nova-micro",
+   "cost_usd": 0.000672
+  },
+  {
+   "model": "amazon.nova-lite",
+   "cost_usd": 0.001152
+  },
+  {
+   "model": "openai.gpt-5-nano",
+   "cost_usd": 0.00132
+  },
+  {
+   "model": "google.gemini-2.5-flash-lite",
+   "cost_usd": 0.00192
+  },
+  {
+   ... (full JSON in demo/session-output.txt)
+
+### compare_models_for_task: cost per SUCCESSFUL task (Haiku succeeds 60%, Sonnet 92
+>> compare_models_for_task: cost per SUCCESSFUL task (Haiku succeeds 60%, Sonnet 92%, Opus 97%)
+{
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "ranked": [
+  {
+   "model": "amazon.nova-micro",
+   "display_name": "Amazon Nova Micro",
+   "cost_per_run_usd": 0.000672,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.000672
+  },
+  {
+   "model": "amazon.nova-lite",
+   "display_name": "Amazon Nova Lite",
+   "cost_per_run_usd": 0.001152,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.001152
+  },
+  {
+   "model": "openai.gpt-5-nano",
+   "display_name": "GPT-5 nano",
+   "cost_per_run_usd": 0.00132,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.00132
+  },
+  {
+   "model": "google.gemini-2.5-flash-lite",
+   ... (full JSON in demo/session-output.txt)
+
+### record_spend #1: task demo-task, Sonnet run
+>> record_spend #1: task demo-task, Sonnet run
+{
+ "task_id": "demo-task",
+ "model_id": "anthropic.claude-sonnet-4-5",
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "cost_usd": 0.063,
+ "recorded_at": "2026-11-09T06:02:01.135343+00:00"
+}
+
+### record_spend #2: task demo-task, Haiku retry
+>> record_spend #2: task demo-task, Haiku retry
+{
+ "task_id": "demo-task",
+ "model_id": "anthropic.claude-haiku-4-5",
+ "input_tokens": 9400,
+ "output_tokens": 1200,
+ "cost_usd": 0.0154,
+ "recorded_at": "2026-11-09T06:02:01.140162+00:00"
+}
+
+### budget_status: demo-task against a $0.10 budget
+>> budget_status: demo-task against a $0.10 budget
+{
+ "task_id": "demo-task",
+ "spent_usd": 0.0784,
+ "budget_usd": 0.1,
+ "remaining_usd": 0.0216,
+ "over_budget": false,
+ "calls": 2,
+ "models_used": [
+  "anthropic.claude-haiku-4-5",
+  "anthropic.claude-sonnet-4-5"
+ ],
+ "by_model": {
+  "anthropic.claude-haiku-4-5": {
+   "calls": 1,
+   "input_tokens": 9400,
+   "output_tokens": 1200,
+   "spent_usd": 0.0154
+  },
+  "anthropic.claude-sonnet-4-5": {
+   "calls": 1,
+   "input_tokens": 12000,
+   "output_tokens": 1800,
+   "spent_usd": 0.063
+  }
+ }
+}
+
+### What this shows
+>> price_usage prices one concrete usage record at list rates.
+>> estimate_run_cost prices the same workload on every model.
+>> compare_models_for_task re-ranks by cost per SUCCESSFUL task —
+>>   the cheapest token price is not the cheapest solved task.
+>> record_spend + budget_status keep a per-task ledger: spend is
+>>   visible during the run, not on next month's bill.
+# Evidence: demo/session-output.txt + demo/ledger.json (the actual ledger written)

@@ -1,0 +1,227 @@
+>> tools/list — server offers:
+   - price_usage
+   - estimate_run_cost
+   - compare_models_for_task
+   - record_spend
+   - budget_status
+
+>> price_usage: Sonnet 4.5, 12,000 in / 1,800 out
+{
+ "model": "anthropic.claude-sonnet-4-5",
+ "display_name": "Claude Sonnet 4.5",
+ "provider": "anthropic",
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "input_cost_usd": 0.036,
+ "output_cost_usd": 0.027,
+ "cost_usd": 0.063
+}
+
+>> estimate_run_cost: same workload, every model
+{
+ "model": "anthropic.claude-sonnet-4-5",
+ "display_name": "Claude Sonnet 4.5",
+ "provider": "anthropic",
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "input_cost_usd": 0.036,
+ "output_cost_usd": 0.027,
+ "cost_usd": 0.063,
+ "alternatives": [
+  {
+   "model": "amazon.nova-micro",
+   "cost_usd": 0.000672
+  },
+  {
+   "model": "amazon.nova-lite",
+   "cost_usd": 0.001152
+  },
+  {
+   "model": "openai.gpt-5-nano",
+   "cost_usd": 0.00132
+  },
+  {
+   "model": "google.gemini-2.5-flash-lite",
+   "cost_usd": 0.00192
+  },
+  {
+   "model": "openai.gpt-4o-mini",
+   "cost_usd": 0.00288
+  },
+  {
+   "model": "openai.gpt-5-mini",
+   "cost_usd": 0.0066
+  },
+  {
+   "model": "openai.gpt-4.1-mini",
+   "cost_usd": 0.00768
+  },
+  {
+   "model": "google.gemini-2.5-flash",
+   "cost_usd": 0.0081
+  },
+  {
+   "model": "amazon.nova-pro",
+   "cost_usd": 0.01536
+  },
+  {
+   "model": "anthropic.claude-haiku-3-5",
+   "cost_usd": 0.0168
+  },
+  {
+   "model": "anthropic.claude-haiku-4-5",
+   "cost_usd": 0.021
+  },
+  {
+   "model": "openai.o4-mini",
+   "cost_usd": 0.02112
+  },
+  {
+   "model": "openai.gpt-5",
+   "cost_usd": 0.033
+  },
+  {
+   "model": "google.gemini-2.5-pro",
+   "cost_usd": 0.033
+  },
+  {
+   "model": "openai.gpt-4.1",
+   "cost_usd": 0.0384
+  },
+  {
+   "model": "openai.gpt-4o",
+   "cost_usd": 0.048
+  },
+  {
+   "model": "anthropic.claude-opus-4-5",
+   "cost_usd": 0.105
+  }
+ ],
+ "pricing_snapshot": "v1 (2026-10-20)"
+}
+
+>> compare_models_for_task: cost per SUCCESSFUL task (Haiku succeeds 60%, Sonnet 92%, Opus 97%)
+{
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "ranked": [
+  {
+   "model": "amazon.nova-micro",
+   "display_name": "Amazon Nova Micro",
+   "cost_per_run_usd": 0.000672,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.000672
+  },
+  {
+   "model": "amazon.nova-lite",
+   "display_name": "Amazon Nova Lite",
+   "cost_per_run_usd": 0.001152,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.001152
+  },
+  {
+   "model": "openai.gpt-5-nano",
+   "display_name": "GPT-5 nano",
+   "cost_per_run_usd": 0.00132,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.00132
+  },
+  {
+   "model": "google.gemini-2.5-flash-lite",
+   "display_name": "Gemini 2.5 Flash-Lite",
+   "cost_per_run_usd": 0.00192,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.00192
+  },
+  {
+   "model": "openai.gpt-4o-mini",
+   "display_name": "GPT-4o mini",
+   "cost_per_run_usd": 0.00288,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.00288
+  },
+  {
+   "model": "openai.gpt-5-mini",
+   "display_name": "GPT-5 mini",
+   "cost_per_run_usd": 0.0066,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.0066
+  },
+  {
+   "model": "openai.gpt-4.1-mini",
+   "display_name": "GPT-4.1 mini",
+   "cost_per_run_usd": 0.00768,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.00768
+  },
+  {
+   "model": "google.gemini-2.5-flash",
+   "display_name": "Gemini 2.5 Flash",
+   "cost_per_run_usd": 0.0081,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.0081
+  },
+  {
+   "model": "amazon.nova-pro",
+   "display_name": "Amazon Nova Pro",
+   "cost_per_run_usd": 0.01536,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.01536
+  },
+  {
+   "model": "anthropic.claude-haiku-3-5",
+   "display_name": "Claude Haiku 3.5",
+   "cost_per_run_usd": 0.0168,
+   "success_rate": 1.0,
+   "cost_per_success_usd": 0.0168
+  },
+  {
+   "m
+
+>> record_spend #1: task demo-task, Sonnet run
+{
+ "task_id": "demo-task",
+ "model_id": "anthropic.claude-sonnet-4-5",
+ "input_tokens": 12000,
+ "output_tokens": 1800,
+ "cost_usd": 0.063,
+ "recorded_at": "2026-11-09T06:02:01.135343+00:00"
+}
+
+>> record_spend #2: task demo-task, Haiku retry
+{
+ "task_id": "demo-task",
+ "model_id": "anthropic.claude-haiku-4-5",
+ "input_tokens": 9400,
+ "output_tokens": 1200,
+ "cost_usd": 0.0154,
+ "recorded_at": "2026-11-09T06:02:01.140162+00:00"
+}
+
+>> budget_status: demo-task against a $0.10 budget
+{
+ "task_id": "demo-task",
+ "spent_usd": 0.0784,
+ "budget_usd": 0.1,
+ "remaining_usd": 0.0216,
+ "over_budget": false,
+ "calls": 2,
+ "models_used": [
+  "anthropic.claude-haiku-4-5",
+  "anthropic.claude-sonnet-4-5"
+ ],
+ "by_model": {
+  "anthropic.claude-haiku-4-5": {
+   "calls": 1,
+   "input_tokens": 9400,
+   "output_tokens": 1200,
+   "spent_usd": 0.0154
+  },
+  "anthropic.claude-sonnet-4-5": {
+   "calls": 1,
+   "input_tokens": 12000,
+   "output_tokens": 1800,
+   "spent_usd": 0.063
+  }
+ }
+}
