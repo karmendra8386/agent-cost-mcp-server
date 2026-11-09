@@ -27,6 +27,14 @@ it makes no network calls at runtime.
 
 *A live MCP client session (Nov 9, 2026): the client connects over stdio, lists the five tools, prices a Sonnet 4.5 run at $0.063, re-ranks models by cost per **successful** task, records two spends to the ledger, and checks the task against its budget — $0.0784 of $0.10 spent. Full session output and the ledger it wrote are in [`demo/`](demo/).*
 
+## Works with
+
+- **[tokenecon](https://github.com/karmendra8386/agentic-ai-token-economics)** — this server is built on tokenecon's cost model; `compare_models_for_task` is its cost-per-correct ranking exposed as a tool an agent can call mid-run.
+- **[Argus](https://github.com/karmendra8386/argus)** — the enforcement counterpart: this server supplies the numbers inside MCP tooling, while Argus enforces policy and budgets at the gateway — in Argus Chat, every answer through Argus carries a tokenecon receipt.
+- **[mcplens](https://github.com/karmendra8386/mcplens)** — the vetting counterpart: before any MCP server is trusted, mcplens grades what it actually does against what its descriptions claim.
+
+**The connected set** — one thread through all of it: what an agent did, what it cost, and whether it should have been allowed. [Argus](https://github.com/karmendra8386/argus) · [tokenecon](https://github.com/karmendra8386/agentic-ai-token-economics) · [mcplens](https://github.com/karmendra8386/mcplens) · [agent-cost-mcp-server](https://github.com/karmendra8386/agent-cost-mcp-server) · [Argus Lens](https://github.com/karmendra8386/argus-lens) · [PersistAIBench](https://github.com/karmendra8386/persistbench-bench) · [Argus-Bench](https://doi.org/10.5281/zenodo.23877366)
+
 ## Tools
 
 | Tool | Arguments | Returns |
